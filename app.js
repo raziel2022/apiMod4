@@ -36,4 +36,3 @@ mongoose.connect(process.env.MONGOURI,
 
 app.use('/',require('./src/routes'))
 
-app.get('/',(req, res) => res.send("Bienvenido al Proyecto Modulo 4"))
