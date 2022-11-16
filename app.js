@@ -1,7 +1,7 @@
-const db = 'infoGN';
-const dbUser = 'kain87';
-const dbPass = '...qwe123';
-const uri= `mongodb+srv://${dbUser}:${dbPass}@cluster0.obolh5v.mongodb.net/${db}?retryWrites=true&w=majority`;
+// const db = 'infoGN';
+// const dbUser = 'kain87';
+// const dbPass = '...qwe123';
+// const uri= `mongodb+srv://kain87:...qwe123@cluster0.obolh5v.mongodb.net/infoGN?retryWrites=true&w=majority`;
 
 //Load app dependencies  
 var express = require('express'),  
@@ -11,14 +11,15 @@ var app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const PORT=4001;
+
+
   
 //Start the server  
-app.listen(PORT, ()=>{
+app.listen(process.env.PORT, ()=>{
   console.log("El servidor esta listo");
 });
 //start mongoDB
-mongoose.connect(uri,
+mongoose.connect(process.env.MONGOURI,
   (err) => {
       if (!err) {
           //alert if a successful connection is made 
@@ -34,3 +35,5 @@ mongoose.connect(uri,
 
 
 app.use('/',require('./src/routes'))
+
+app.get('/',(req, res) => res.send("Bienvenido al Proyecto Modulo 4"))
