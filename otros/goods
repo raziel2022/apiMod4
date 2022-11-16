@@ -1,0 +1,67 @@
+
+app.get('/',(req,res)=>res.send("hola mundo 3"));
+
+
+//nos regresa todos los gods que hay en el arreglo http://localhost:4001/gods
+app.get('/gods', (req,res,next) => {
+    const gods=[
+        {name: "Zeus"},
+        {name: "Poseidon"},
+        {name: "Ades"}
+
+    ];
+    res.send(gods);
+});
+
+
+//deesta forma escogemos el nombre de quien queremos que nos muestre el objeto ejemplo: http://localhost:4001/gods/Hades  
+const gods={
+    Zeus: { live: 'Olimpo', symbol:'Thunderbolt'},
+    Hades: { live: 'Underwordl', symbol:'Cornucopia'}
+}
+
+
+//metodo Get mandando datos a la URL
+
+
+app.get('/gods/:name', (req, res, next) => {
+    const name = gods[req.params.name];
+    console.log(req.query);
+    if (name) {
+      res.status(200).send(name);
+    } else {
+      res.status(404).send('No se encontro un Dios');
+    }
+  });
+
+
+  //modificando con el metodo put
+
+  app.put('/gods/:name', (req,res) => {
+    const god = req.body;
+    gods[req.params.name] = god
+    res.status(200).send(gods);
+  })
+
+
+
+  //MEtodo Post agregando un nuevo dios
+
+  app.post('/gods', (req, res) => {
+    const name = req.query.name
+    const newGod = req.body;
+    gods[name] = newGod;
+    res.status(200).send(gods);
+  })
+
+
+  //eliminando un dios
+
+  app.delete('/gods/:name', (req, res) =>{
+    const name = req.params.name;
+    if (delete gods[name]){
+      res.send(gods)
+    } else {
+      res.status(500)
+    }
+  })
