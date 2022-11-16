@@ -1,12 +1,12 @@
 const { response } = require("express");
 const mongoose = require("mongoose");
-const Usuario=require("../modules/Usuario")
+const InfoIp=require("../modules/InfoIp")
 
 
 //CREATE
-function crearUsuario(req,res){
+function crearInfoIp(req,res){
     const info = req.body;
-    const user = new Usuario(info);
+    const user = new InfoIp(info);
     user.save()
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
@@ -14,16 +14,16 @@ function crearUsuario(req,res){
 
 
 //READ-->obtenemos todos los productos por nombre
-function obtenerUsuarios(req,res){
-    Usuario.find()
+function obtenerInfoIps(req,res){
+    InfoIp.find()
     .then(data => res.status(200).send(data))
     .catch(err => res.status(500).send(err))
 }
 
 //Obtener por id
-function findUsuario(req, res) {  
+function findInfoIp(req, res) {  
     const pid=req.params.id;
-    Usuario.findById({_id: pid})
+    InfoIp.findById({_id: pid})
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err))
 };  
@@ -31,10 +31,10 @@ function findUsuario(req, res) {
 
 //UPDATE -->actualizamos un solo elmento por ID
 
-function modificarUsuario(req, res) {
+function modificarInfoIp(req, res) {
     const pid = req.params.id;
     const body=req.body;
-    Usuario.updateOne(
+    InfoIp.updateOne(
         {_id: pid},
         body,
         (err,user)=>{
@@ -46,18 +46,18 @@ function modificarUsuario(req, res) {
 
 
 //DELETE
-function eliminarUsuario(req,res){
+function eliminarInfoIp(req,res){
     const name = req.params.nombre;
-    Usuario.findOneAndRemove({nombre : name})
+    InfoIp.findOneAndRemove({nombre : name})
     .then(data => res.send({message:`Se elimino el producto correctamente: ${name} `}))
     .catch(err => res.status(500).send({message:`No se elimino correctamnte el producto: ${name}`}))
 }
 
 //modulos exportados
 module.exports={
-    obtenerUsuarios,
-    findUsuario,
-    crearUsuario,
-    modificarUsuario,
-    eliminarUsuario
+    obtenerInfoIps,
+    findInfoIp,
+    crearInfoIp,
+    modificarInfoIp,
+    eliminarInfoIp
 }

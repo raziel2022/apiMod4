@@ -1,9 +1,4 @@
-// const db = 'infoGN';
-// const dbUser = 'kain87';
-// const dbPass = '...qwe123';
-// const uri= `mongodb+srv://kain87:...qwe123@cluster0.obolh5v.mongodb.net/infoGN?retryWrites=true&w=majority`;
-
-//Load app dependencies  
+//Cargando dependencias
 var express = require('express'),  
   mongoose = require('mongoose'),  
   http = require('http');  
@@ -14,19 +9,19 @@ app.use(bodyParser.json());
 
 
   
-//Start the server  
+//Inicia Server  
 app.listen(process.env.PORT, ()=>{
   console.log("El servidor esta listo");
 });
-//start mongoDB
+//Inicia mongoDB
 mongoose.connect(process.env.MONGOURI,
   (err) => {
       if (!err) {
-          //alert if a successful connection is made 
+          //Alerta de conexión exitosa a la Base de Datos
           console.log('Conexión Correcta con MongoDB')
       }
       else {
-          //alert if there is an error in the connection
+          //Alerta de error en la conexión a la Base de datos
           console.log("Error en la conexón MongoDB: " + JSON.stringify(err, undefined, 2)); 
       }
   }
