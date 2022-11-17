@@ -13,7 +13,7 @@ routerU.get('/', obtenerUsuarios)
 routerU.get('/:id', findUsuario)
 routerU.post('/',crearUsuario)
 routerU.put('/:id',modificarUsuario)
-routerU.delete('/:nombre', eliminarUsuario)
+routerU.delete('/:id', eliminarUsuario)
 
 
 module.exports = routerU;
