@@ -47,10 +47,10 @@ function modificarUsuario(req, res) {
 
 //DELETE
 function eliminarUsuario(req,res){
-    const name = req.params.nombre;
-    Usuario.findOneAndRemove({nombre : name})
-    .then(data => res.send({message:`Se elimino el producto correctamente: ${name} `}))
-    .catch(err => res.status(500).send({message:`No se elimino correctamnte el producto: ${name}`}))
+    const pid = req.params.id;
+    Usuario.findOneAndRemove({_id: pid})
+    .then(data => res.send({message:`Se elimino el producto correctamente: ${data} `}))
+    .catch(err => res.status(500).send({message:`No se elimino correctamnte el producto: ${err}`}))
 }
 
 //modulos exportados
